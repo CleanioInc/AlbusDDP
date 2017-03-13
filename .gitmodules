@@ -1,0 +1,6 @@
+[submodule "Carthage/Checkouts/meteor-ios"]
+	path = Carthage/Checkouts/meteor-ios
+	url = https://github.com/martijnwalraven/meteor-ios.git
+[submodule "Carthage/Checkouts/ObjectMapper"]
+	path = Carthage/Checkouts/ObjectMapper
+	url = https://github.com/Hearst-DD/ObjectMapper.git
