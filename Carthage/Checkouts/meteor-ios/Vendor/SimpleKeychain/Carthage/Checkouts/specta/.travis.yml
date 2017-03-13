@@ -1,5 +1,0 @@
-language: objective-c
-osx_image: yosemite
-script:
- - bundle exec rake specs:ios
- - bundle exec rake specs:osx
