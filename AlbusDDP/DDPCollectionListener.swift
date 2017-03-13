@@ -7,6 +7,6 @@
 //
 
 
-protocol DDPCollectionListener: class {
+public protocol DDPCollectionListener: class {
     func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType);
 }

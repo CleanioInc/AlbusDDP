@@ -9,8 +9,8 @@
 import Foundation
 
 
-typealias JSONFields = [String: Any]
+public typealias JSONFields = [String: Any]
 
-enum DDPUpdateType {
+public enum DDPUpdateType {
     case added, changed, removed, ready
 }

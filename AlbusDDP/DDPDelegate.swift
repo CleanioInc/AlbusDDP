@@ -9,13 +9,13 @@
 import Foundation
 import Meteor
 
-class DDPDelegate {
+public class DDPDelegate {
     
     fileprivate var clientListeners: [DDPClientListener]
     
-    let meteorClient: METDDPClient
+    public let meteorClient: METDDPClient
     
-    init(serverURL: URL) {
+    public init(serverURL: URL) {
         self.clientListeners = [DDPClientListener]()
         self.meteorClient = METDDPClient(serverURL: serverURL)
         NotificationCenter.default.addObserver(self,
@@ -33,13 +33,13 @@ class DDPDelegate {
     
     //MARK: - HELPERS
     
-    func addClientListener(_ newListener: DDPClientListener) {
+    public func addClientListener(_ newListener: DDPClientListener) {
         if self.indexForClientListener(listener: newListener) == nil {
             self.clientListeners.append(newListener)
         }
     }
     
-    func removeClientListener(_ oldListener: DDPClientListener) {
+    public func removeClientListener(_ oldListener: DDPClientListener) {
         if let index = self.indexForClientListener(listener: oldListener) {
             self.clientListeners.remove(at: index)
         }

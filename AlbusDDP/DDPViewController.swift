@@ -9,13 +9,13 @@
 import Foundation
 
 
-class DDPViewController: UIViewController {
+public class DDPViewController: UIViewController {
     
     
     fileprivate var listenedCollections: [DDPCollection<DDPDocument>]!
     
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
         if let collections = self.onListenCollections() {
@@ -23,12 +23,12 @@ class DDPViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.addViewControllerAsCollectionsListener()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         self.removeViewControllerAsCollectionsListener()
         super.viewWillDisappear(animated)
     }
@@ -36,15 +36,15 @@ class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    func onListenCollections() -> [DDPCollection<DDPDocument>]? {
+    public func onListenCollections() -> [DDPCollection<DDPDocument>]? {
         return nil
     }
     
-    func onRefreshCollections() {
+    public func onRefreshCollections() {
         
     }
     
-    func onCollectionUpdatedOnMainQueue<T:DDPDocument>(_ collection: DDPCollection<T>, documentId: String?, updateType: DDPUpdateType) {
+    public func onCollectionUpdatedOnMainQueue<T:DDPDocument>(_ collection: DDPCollection<T>, documentId: String?, updateType: DDPUpdateType) {
         
     }
     
@@ -69,7 +69,7 @@ class DDPViewController: UIViewController {
 
 extension DDPViewController: DDPCollectionListener {
     
-    func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
+    public func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
         DispatchQueue.main.async(execute: {
             self.onCollectionUpdatedOnMainQueue(collection, documentId: documentId, updateType: updateType)
         });

@@ -7,7 +7,7 @@
 //
 
 
-protocol DDPClientListener: class {
+public protocol DDPClientListener: class {
     func onCollection(named collectionName: String, addedDocument documentId: String, withFields fields: JSONFields)
     func onCollection(named collectionName: String, changedDocument documentId: String, withUpdatedFields updatedFields: JSONFields)
     func onCollection(named collectionName: String, removedDocument documentId: String)

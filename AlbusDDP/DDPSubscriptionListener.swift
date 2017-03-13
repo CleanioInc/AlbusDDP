@@ -7,6 +7,6 @@
 //
 
 
-protocol DDPSubscriptionListener: class {
+public protocol DDPSubscriptionListener: class {
     func onSubscriptionReady(_ ready: Bool)
 }

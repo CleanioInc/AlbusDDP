@@ -9,21 +9,21 @@
 import Foundation
 import ObjectMapper
 
-class DDPDocument: NSObject, Mappable {
+public class DDPDocument: NSObject, Mappable {
     
     static let kJsonId: String = "_id"
     
     var id: String?
     
-    required init?(map: Map) {
+    required public init?(map: Map) {
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         self.id <- map[DDPDocument.kJsonId]
     }
     
     
-    class func build<T: DDPDocument>(documentId: String?, documentFields: JSONFields) -> T? {
+    class public func build<T: DDPDocument>(documentId: String?, documentFields: JSONFields) -> T? {
         if let newDocument = Mapper<T>().map(JSON: documentFields) {
             newDocument.id = documentId
             return newDocument
@@ -31,7 +31,7 @@ class DDPDocument: NSObject, Mappable {
         return nil
     }
     
-    func update<T:DDPDocument>(updatedFields: JSONFields?, removedFields: String?, type: T.Type) {
+    public func update<T:DDPDocument>(updatedFields: JSONFields?, removedFields: String?, type: T.Type) {
         if let updatedFields = updatedFields {
             self.updateFields(updatedFields: updatedFields, type: type)
         }

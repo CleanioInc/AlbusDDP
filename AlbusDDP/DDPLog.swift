@@ -8,9 +8,9 @@
 
 import Foundation
 
-class DDPLog {
+public class DDPLog {
     
-    class func p(_ tag: String, title: String, params: String...) {
+    class public func p(_ tag: String, title: String, params: String...) {
         var message: String = title
         for param: String in params {
             message += (" | " + param)
@@ -18,7 +18,7 @@ class DDPLog {
         DDPLog.p(tag, message: message)
     }
     
-    class func p(_ tag: String, message: String) {
+    class public func p(_ tag: String, message: String) {
         let formattedMessage = tag + " ### " + message
         print(formattedMessage)
     }
