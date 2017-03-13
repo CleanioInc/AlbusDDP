@@ -12,8 +12,6 @@
 		C3A101B51E70541200485061 /* AlbusDDP.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A101A71E70541200485061 /* AlbusDDP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3F1F7831E71BE52000B2AA7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = C3F1F7821E71BE52000B2AA7 /* Cartfile */; };
 		C3F1F7881E71BFA4000B2AA7 /* DDPDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */; };
-		C3F1F78F1E71C0C4000B2AA7 /* Meteor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F1F78E1E71C0C4000B2AA7 /* Meteor.framework */; };
-		C3F1F7911E71C239000B2AA7 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F1F7901E71C239000B2AA7 /* ObjectMapper.framework */; };
 		C3F1F7931E72C143000B2AA7 /* DDPCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */; };
 		C3F1F7951E72EF51000B2AA7 /* DDPUpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7941E72EF51000B2AA7 /* DDPUpdateType.swift */; };
 		C3F1F7981E72F8E7000B2AA7 /* DDPDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7971E72F8E7000B2AA7 /* DDPDelegate.swift */; };
@@ -24,6 +22,8 @@
 		C3F1F7A51E730F8E000B2AA7 /* DDPClientListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A41E730F8E000B2AA7 /* DDPClientListener.swift */; };
 		C3F1F7A71E731C3D000B2AA7 /* DDPSubscriptionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A61E731C3D000B2AA7 /* DDPSubscriptionListener.swift */; };
 		C3F1F7AB1E769B2F000B2AA7 /* DDPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7AA1E769B2F000B2AA7 /* DDPViewController.swift */; };
+		C3F1F7D01E76B66D000B2AA7 /* Meteor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F1F7CF1E76B66D000B2AA7 /* Meteor.framework */; };
+		C3F1F7D21E76B67D000B2AA7 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F1F7D11E76B67D000B2AA7 /* ObjectMapper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,6 @@
 		C3A101B41E70541200485061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3F1F7821E71BE52000B2AA7 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPDocument.swift; sourceTree = "<group>"; };
-		C3F1F78E1E71C0C4000B2AA7 /* Meteor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Meteor.framework; path = Frameworks/Meteor.framework; sourceTree = "<group>"; };
-		C3F1F7901E71C239000B2AA7 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Frameworks/ObjectMapper.framework; sourceTree = "<group>"; };
 		C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPCollection.swift; sourceTree = "<group>"; };
 		C3F1F7941E72EF51000B2AA7 /* DDPUpdateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPUpdateType.swift; sourceTree = "<group>"; };
 		C3F1F7971E72F8E7000B2AA7 /* DDPDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +55,8 @@
 		C3F1F7A41E730F8E000B2AA7 /* DDPClientListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPClientListener.swift; sourceTree = "<group>"; };
 		C3F1F7A61E731C3D000B2AA7 /* DDPSubscriptionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPSubscriptionListener.swift; sourceTree = "<group>"; };
 		C3F1F7AA1E769B2F000B2AA7 /* DDPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPViewController.swift; sourceTree = "<group>"; };
+		C3F1F7CF1E76B66D000B2AA7 /* Meteor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Meteor.framework; path = "Carthage/Checkouts/meteor-ios/build/Debug-iphoneos/Meteor.framework"; sourceTree = "<group>"; };
+		C3F1F7D11E76B67D000B2AA7 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "Carthage/Checkouts/ObjectMapper/build/Debug-iphoneos/ObjectMapper.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F1F7911E71C239000B2AA7 /* ObjectMapper.framework in Frameworks */,
-				C3F1F78F1E71C0C4000B2AA7 /* Meteor.framework in Frameworks */,
+				C3F1F7D21E76B67D000B2AA7 /* ObjectMapper.framework in Frameworks */,
+				C3F1F7D01E76B66D000B2AA7 /* Meteor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +86,8 @@
 				C3A101A61E70541200485061 /* AlbusDDP */,
 				C3A101B11E70541200485061 /* AlbusDDPTests */,
 				C3A101A51E70541200485061 /* Products */,
-				C3F1F78D1E71C0AB000B2AA7 /* Frameworks */,
 				C3F1F7821E71BE52000B2AA7 /* Cartfile */,
+				C3F1F7CE1E76B66D000B2AA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,15 +133,6 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		C3F1F78D1E71C0AB000B2AA7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C3F1F7901E71C239000B2AA7 /* ObjectMapper.framework */,
-				C3F1F78E1E71C0C4000B2AA7 /* Meteor.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C3F1F7961E72F8D8000B2AA7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +167,15 @@
 				C3F1F7A11E730258000B2AA7 /* ExMETDocumentChangeType.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		C3F1F7CE1E76B66D000B2AA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3F1F7D11E76B67D000B2AA7 /* ObjectMapper.framework */,
+				C3F1F7CF1E76B66D000B2AA7 /* Meteor.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +437,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Checkouts/meteor-ios/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = AlbusDDP/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -462,6 +464,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Checkouts/meteor-ios/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = AlbusDDP/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

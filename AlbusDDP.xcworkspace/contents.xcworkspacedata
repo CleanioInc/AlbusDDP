@@ -4,4 +4,10 @@
    <FileRef
       location = "container:AlbusDDP.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/meteor-ios/Meteor.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Carthage/Checkouts/ObjectMapper/ObjectMapper.xcodeproj">
+   </FileRef>
 </Workspace>
