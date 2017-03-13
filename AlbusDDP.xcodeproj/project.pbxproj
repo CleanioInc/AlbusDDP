@@ -23,7 +23,6 @@
 		C3F1F7A31E730258000B2AA7 /* ExMETDocumentChangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A11E730258000B2AA7 /* ExMETDocumentChangeType.swift */; };
 		C3F1F7A51E730F8E000B2AA7 /* DDPClientListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A41E730F8E000B2AA7 /* DDPClientListener.swift */; };
 		C3F1F7A71E731C3D000B2AA7 /* DDPSubscriptionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A61E731C3D000B2AA7 /* DDPSubscriptionListener.swift */; };
-		C3F1F7A91E731F98000B2AA7 /* UMeteor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7A81E731F98000B2AA7 /* UMeteor.swift */; };
 		C3F1F7AB1E769B2F000B2AA7 /* DDPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7AA1E769B2F000B2AA7 /* DDPViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		C3F1F7A11E730258000B2AA7 /* ExMETDocumentChangeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExMETDocumentChangeType.swift; sourceTree = "<group>"; };
 		C3F1F7A41E730F8E000B2AA7 /* DDPClientListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPClientListener.swift; sourceTree = "<group>"; };
 		C3F1F7A61E731C3D000B2AA7 /* DDPSubscriptionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPSubscriptionListener.swift; sourceTree = "<group>"; };
-		C3F1F7A81E731F98000B2AA7 /* UMeteor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMeteor.swift; sourceTree = "<group>"; };
 		C3F1F7AA1E769B2F000B2AA7 /* DDPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,7 +164,6 @@
 		C3F1F79C1E730146000B2AA7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C3F1F7A81E731F98000B2AA7 /* UMeteor.swift */,
 				C3F1F79D1E73015B000B2AA7 /* DDPLog.swift */,
 			);
 			name = Utils;
@@ -305,7 +302,6 @@
 				C3F1F7931E72C143000B2AA7 /* DDPCollection.swift in Sources */,
 				C3F1F7981E72F8E7000B2AA7 /* DDPDelegate.swift in Sources */,
 				C3F1F7881E71BFA4000B2AA7 /* DDPDocument.swift in Sources */,
-				C3F1F7A91E731F98000B2AA7 /* UMeteor.swift in Sources */,
 				C3F1F7A21E730258000B2AA7 /* ExMETDDPConnectionStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

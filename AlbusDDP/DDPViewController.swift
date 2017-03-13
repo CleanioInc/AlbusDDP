@@ -19,7 +19,7 @@ class DDPViewController: UIViewController {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
         if let collections = self.onListenCollections() {
-            self.listenedCollections.append(contentsOf: collections)t
+            self.listenedCollections.append(contentsOf: collections)
         }
     }
     
