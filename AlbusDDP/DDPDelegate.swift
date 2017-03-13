@@ -70,7 +70,7 @@ open class DDPDelegate {
                 let changeTypeName: String = documentChangeDetails.changeType.description
                 let collectionName: String = documentChangeDetails.documentKey.collectionName
                 let documentId: String = documentChangeDetails.documentKey.documentID as! String
-                DDPLog.p("DDP", title: changeTypeName, params: collectionName, documentId)
+                DDPLog.p("DDP", header: changeTypeName, params: collectionName, documentId)
                 
                 for clientListener in self.clientListeners {
                     switch(documentChangeDetails.changeType) {

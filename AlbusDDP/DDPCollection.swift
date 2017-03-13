@@ -18,7 +18,7 @@ open class DDPCollection<T:DDPDocument> {
     open var collectionName: String
     open var ready: Bool
     
-    public init(collectionName: String) {
+    public init(named collectionName: String) {
         self.documents = [T]()
         self.collectionListeners = [DDPCollectionListener]()
         self.collectionName = collectionName

@@ -11,7 +11,7 @@ import ObjectMapper
 
 open class DDPDocument: NSObject, Mappable {
     
-    static let kJsonId: String = "_id"
+    open static let kJsonId: String = "_id"
     
     open var id: String?
     

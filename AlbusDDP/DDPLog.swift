@@ -10,8 +10,16 @@ import Foundation
 
 open class DDPLog {
     
-    open class func p(_ tag: String, title: String, params: String...) {
-        var message: String = title
+    open static let kLogTag: String = "DDP"
+    open static let kLogHeaderLogin: String = "LOGIN"
+    open static let kLogHeaderLogout: String = "LOGOUT"
+    open static let kLogHeaderMethod: String = "METHOD"
+    open static let kLogHeaderSubscription: String = "SUBSCRIPTION"
+    open static let kLogResultSuccess: String = "SUCCESS"
+    open static let kLogResultError: String = "ERROR"
+    
+    open class func p(_ tag: String, header: String, params: String...) {
+        var message: String = header
         for param: String in params {
             message += (" | " + param)
         }
