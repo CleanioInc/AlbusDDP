@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class DDPCollection<T:DDPDocument> {
+open class DDPCollection<T:DDPDocument> {
 
     
     fileprivate var documents: [T]

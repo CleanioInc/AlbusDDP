@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-public class DDPDocument: NSObject, Mappable {
+open class DDPDocument: NSObject, Mappable {
     
     static let kJsonId: String = "_id"
     

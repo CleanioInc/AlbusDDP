@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DDPLog {
+open class DDPLog {
     
     class public func p(_ tag: String, title: String, params: String...) {
         var message: String = title

@@ -9,13 +9,13 @@
 import Foundation
 
 
-public class DDPViewController: UIViewController {
+open class DDPViewController: UIViewController {
     
     
     fileprivate var listenedCollections: [DDPCollection<DDPDocument>]!
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
         if let collections = self.onListenCollections() {
@@ -23,12 +23,12 @@ public class DDPViewController: UIViewController {
         }
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.addViewControllerAsCollectionsListener()
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         self.removeViewControllerAsCollectionsListener()
         super.viewWillDisappear(animated)
     }

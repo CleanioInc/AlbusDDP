@@ -9,7 +9,7 @@
 import Foundation
 import Meteor
 
-public class DDPDelegate {
+open class DDPDelegate {
     
     fileprivate var clientListeners: [DDPClientListener]
     
