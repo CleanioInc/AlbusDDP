@@ -13,7 +13,7 @@ open class DDPDelegate {
     
     fileprivate var clientListeners: [DDPClientListener]
     
-    public let meteorClient: METDDPClient
+    open let meteorClient: METDDPClient
     
     public init(serverURL: URL) {
         self.clientListeners = [DDPClientListener]()
@@ -33,13 +33,13 @@ open class DDPDelegate {
     
     //MARK: - HELPERS
     
-    public func addClientListener(_ newListener: DDPClientListener) {
+    open func addClientListener(_ newListener: DDPClientListener) {
         if self.indexForClientListener(listener: newListener) == nil {
             self.clientListeners.append(newListener)
         }
     }
     
-    public func removeClientListener(_ oldListener: DDPClientListener) {
+    open func removeClientListener(_ oldListener: DDPClientListener) {
         if let index = self.indexForClientListener(listener: oldListener) {
             self.clientListeners.remove(at: index)
         }
@@ -57,12 +57,12 @@ open class DDPDelegate {
     
     //MARK: - SELECTORS
     
-    @objc func meteorClientConnectionStatusDidChanged() {
+    @objc open func meteorClientConnectionStatusDidChanged() {
         DDPLog.p("DDP", message: "CONNECTION STATUS : " + self.meteorClient.connectionStatus.description)
     }
     
     
-    @objc func meteorDatabaseDidChange(_ notification: Notification) {
+    @objc open func meteorDatabaseDidChange(_ notification: Notification) {
         if  let userInfo = (notification as NSNotification).userInfo,
             let databaseChanges = userInfo[METDatabaseChangesKey] as? METDatabaseChanges {
         

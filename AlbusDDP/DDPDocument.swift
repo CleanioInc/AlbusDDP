@@ -13,17 +13,17 @@ open class DDPDocument: NSObject, Mappable {
     
     static let kJsonId: String = "_id"
     
-    var id: String?
+    open var id: String?
     
     required public init?(map: Map) {
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         self.id <- map[DDPDocument.kJsonId]
     }
     
     
-    class public func build<T: DDPDocument>(documentId: String?, documentFields: JSONFields) -> T? {
+    open class func build<T: DDPDocument>(documentId: String?, documentFields: JSONFields) -> T? {
         if let newDocument = Mapper<T>().map(JSON: documentFields) {
             newDocument.id = documentId
             return newDocument
@@ -31,7 +31,7 @@ open class DDPDocument: NSObject, Mappable {
         return nil
     }
     
-    public func update<T:DDPDocument>(updatedFields: JSONFields?, removedFields: String?, type: T.Type) {
+    open func update<T:DDPDocument>(updatedFields: JSONFields?, removedFields: String?, type: T.Type) {
         if let updatedFields = updatedFields {
             self.updateFields(updatedFields: updatedFields, type: type)
         }

@@ -15,8 +15,8 @@ open class DDPCollection<T:DDPDocument> {
     fileprivate var documents: [T]
     fileprivate var collectionListeners: [DDPCollectionListener]
     
-    public var collectionName: String
-    public var ready: Bool
+    open var collectionName: String
+    open var ready: Bool
     
     public init(collectionName: String) {
         self.documents = [T]()
@@ -26,11 +26,11 @@ open class DDPCollection<T:DDPDocument> {
     }
     
     
-    public func add(withId documentId: String?, andFields fields: JSONFields) {
+    open func add(withId documentId: String?, andFields fields: JSONFields) {
         self.add(atIndex: self.documents.count, withId: documentId, andFields: fields)
     }
     
-    public func add(atIndex index: Int, withId documentId: String?, andFields fields: JSONFields) {
+    open func add(atIndex index: Int, withId documentId: String?, andFields fields: JSONFields) {
         if documentId == nil || !self.update(withId: documentId!, updatedFields: fields, removedFields: nil) {
             if let document: T = T.build(documentId: documentId, documentFields: fields) {
                 self.documents.insert(document, at: index)
@@ -38,7 +38,7 @@ open class DDPCollection<T:DDPDocument> {
         }
     }
     
-    public func update(withId documentId: String, updatedFields: JSONFields?, removedFields: String?) -> Bool {
+    open func update(withId documentId: String, updatedFields: JSONFields?, removedFields: String?) -> Bool {
         if let document = self.find(withId: documentId) {
             document.update(updatedFields: updatedFields, removedFields: removedFields, type: T.self)
             return true
@@ -46,7 +46,7 @@ open class DDPCollection<T:DDPDocument> {
         return false
     }
     
-    public func remove(withId documentId: String) -> Bool {
+    open func remove(withId documentId: String) -> Bool {
         if  let document = self.find(withId: documentId),
             let documentIndex = self.documents.index(of: document) {
             self.documents.remove(at: documentIndex)
@@ -55,7 +55,7 @@ open class DDPCollection<T:DDPDocument> {
         return false
     }
     
-    public func find(withId documentId: String) -> T? {
+    open func find(withId documentId: String) -> T? {
         for document in self.documents {
             if document.id != nil && document.id == documentId {
                 return document
@@ -67,13 +67,13 @@ open class DDPCollection<T:DDPDocument> {
     
     //MARK: - DDPCollectionListener
     
-    public func addCollectionListener(_ newListener: DDPCollectionListener) {
+    open func addCollectionListener(_ newListener: DDPCollectionListener) {
         if self.indexForCollectionListener(listener: newListener) == nil {
             self.collectionListeners.append(newListener)
         }
     }
     
-    public func removeCollectionListener(_ oldListener: DDPCollectionListener) {
+    open func removeCollectionListener(_ oldListener: DDPCollectionListener) {
         if let index = self.indexForCollectionListener(listener: oldListener) {
             self.collectionListeners.remove(at: index)
         }
@@ -99,14 +99,14 @@ open class DDPCollection<T:DDPDocument> {
 
 extension DDPCollection : DDPClientListener {
     
-    public func onCollection(named collectionName: String, addedDocument documentId: String, withFields fields: JSONFields) {
+    open func onCollection(named collectionName: String, addedDocument documentId: String, withFields fields: JSONFields) {
         if self.collectionName == collectionName {
             self.add(withId: documentId, andFields: fields)
             self.notifyCollectionListenersDocument(withId: documentId, updatedWithType: .added)
         }
     }
     
-    public func onCollection(named collectionName: String, changedDocument documentId: String, withUpdatedFields updatedFields: JSONFields) {
+    open func onCollection(named collectionName: String, changedDocument documentId: String, withUpdatedFields updatedFields: JSONFields) {
         if self.collectionName == collectionName {
             if self.update(withId: documentId, updatedFields: updatedFields, removedFields: nil) {
                 self.notifyCollectionListenersDocument(withId: documentId, updatedWithType: .changed)
@@ -114,7 +114,7 @@ extension DDPCollection : DDPClientListener {
         }
     }
     
-    public func onCollection(named collectionName: String, removedDocument documentId: String) {
+    open func onCollection(named collectionName: String, removedDocument documentId: String) {
         if self.collectionName == collectionName {
             if self.remove(withId: documentId) {
                 self.notifyCollectionListenersDocument(withId: documentId, updatedWithType: .removed)
@@ -126,7 +126,7 @@ extension DDPCollection : DDPClientListener {
 
 extension DDPCollection : DDPSubscriptionListener {
     
-    public func onSubscriptionReady(_ ready: Bool) {
+    open func onSubscriptionReady(_ ready: Bool) {
         self.ready = ready
         self.notifyCollectionListenersDocument(withId: nil, updatedWithType: .ready)
     }

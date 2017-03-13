@@ -36,15 +36,15 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    public func onListenCollections() -> [DDPCollection<DDPDocument>]? {
+    open func onListenCollections() -> [DDPCollection<DDPDocument>]? {
         return nil
     }
     
-    public func onRefreshCollections() {
+    open func onRefreshCollections() {
         
     }
     
-    public func onCollectionUpdatedOnMainQueue<T:DDPDocument>(_ collection: DDPCollection<T>, documentId: String?, updateType: DDPUpdateType) {
+    open func onCollectionUpdatedOnMainQueue<T:DDPDocument>(_ collection: DDPCollection<T>, documentId: String?, updateType: DDPUpdateType) {
         
     }
     
@@ -69,7 +69,7 @@ open class DDPViewController: UIViewController {
 
 extension DDPViewController: DDPCollectionListener {
     
-    public func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
+    open func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
         DispatchQueue.main.async(execute: {
             self.onCollectionUpdatedOnMainQueue(collection, documentId: documentId, updateType: updateType)
         });
