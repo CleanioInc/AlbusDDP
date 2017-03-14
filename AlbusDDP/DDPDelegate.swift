@@ -71,7 +71,7 @@ open class DDPDelegate {
     
     //MARK: -SUBSCRIPTIONS HELPERS
     
-    open func addSubscription(named subscriptionName: String, forCollections collections: DDPCollection<DDPDocument>...) {
+    open func addSubscription<T:DDPDocument>(named subscriptionName: String, forCollections collections: DDPCollection<T>...) {
         for collection in collections {
             self.addClientListener(collection)
         }
@@ -86,7 +86,7 @@ open class DDPDelegate {
                                               onFinish: nil))
     }
     
-    fileprivate func notifySubscriptionReady(withError error: Error?, forCollections collections: [DDPCollection<DDPDocument>]) {
+    fileprivate func notifySubscriptionReady<T:DDPDocument>(withError error: Error?, forCollections collections: [DDPCollection<T>]) {
         for collection in collections {
             collection.onSubscriptionReady(true, error: error)
         }
