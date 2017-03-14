@@ -8,5 +8,5 @@
 
 
 public protocol DDPSubscriptionListener: class {
-    func onSubscriptionReady(_ ready: Bool)
+    func onSubscriptionReady(_ ready: Bool, error: Error?)
 }

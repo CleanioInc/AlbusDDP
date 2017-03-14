@@ -126,7 +126,7 @@ extension DDPCollection : DDPClientListener {
 
 extension DDPCollection : DDPSubscriptionListener {
     
-    open func onSubscriptionReady(_ ready: Bool) {
+    open func onSubscriptionReady(_ ready: Bool, error: Error?) {
         self.ready = ready
         self.notifyCollectionListenersDocument(withId: nil, updatedWithType: .ready)
     }

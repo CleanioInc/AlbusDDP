@@ -29,9 +29,31 @@ open class DDPDelegate {
     }
     
     
+    //MARK: - SUBSCRIPTIONS HELPERS
+    
+    open func addSubscription(named subscriptionName: String, forCollections collections: DDPCollection<DDPDocument>...) {
+        for collection in collections {
+            self.addClientListener(collection)
+        }
+        self.meteorClient.addSubscription(withName: subscriptionName, completionHandler:
+            DDPListeners.subscriptionListener(named: subscriptionName,
+                                              onSuccess: { (Void) in
+                                                self.notifySubscriptionReady(withError: nil, forCollections: collections)
+            },
+                                              onError: { (error: Error) in
+                                                self.notifySubscriptionReady(withError: nil, forCollections: collections)
+            },
+                                              onFinish: nil))
+    }
+    
+    fileprivate func notifySubscriptionReady(withError error: Error?, forCollections collections: [DDPCollection<DDPDocument>]) {
+        for collection in collections {
+            collection.onSubscriptionReady(true, error: error)
+        }
+    }
     
     
-    //MARK: - HELPERS
+    //MARK: - LISTENERS HELPERS
     
     open func addClientListener(_ newListener: DDPClientListener) {
         if self.indexForClientListener(listener: newListener) == nil {
@@ -58,7 +80,7 @@ open class DDPDelegate {
     //MARK: - SELECTORS
     
     @objc open func meteorClientConnectionStatusDidChanged() {
-        DDPLog.p("DDP", message: "CONNECTION STATUS : " + self.meteorClient.connectionStatus.description)
+        DDPLog.p("DDP", header: "CONNECTION STATUS", params: self.meteorClient.connectionStatus.description)
     }
     
     

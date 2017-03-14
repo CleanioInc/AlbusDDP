@@ -11,7 +11,7 @@ import Meteor
 
 open class DDPListeners {
     
-    open static func methodListener(named methodName: String, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?, onFinish: ((Void) -> Void)?) -> METMethodCompletionHandler {
+    open static func methodListener(named methodName: String, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METMethodCompletionHandler {
         DDPLog.p(DDPLog.kLogTag, header: DDPLog.kLogHeaderMethod, params: methodName)
         return { (result: Any?, error: Error?) in
             if let error = error {
@@ -31,7 +31,7 @@ open class DDPListeners {
         }
     }
     
-    open static func subscriptionListener(named subscriptionName: String, onSuccess: ((Void) -> Void)?, onError: ((Error) -> Void)?, onFinish: ((Void) -> Void)?) -> METSubscriptionCompletionHandler {
+    open static func subscriptionListener(named subscriptionName: String, onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METSubscriptionCompletionHandler {
         return DDPListeners.errorListener(named: subscriptionName,
                                           withHeader: DDPLog.kLogHeaderSubscription,
                                           onSuccess: onSuccess,
@@ -39,7 +39,7 @@ open class DDPListeners {
                                           onFinish: onFinish)
     }
     
-    open static func loginListener(onSuccess: ((Void) -> Void)?, onError: ((Error) -> Void)?, onFinish: ((Void) -> Void)?) -> METLogInCompletionHandler {
+    open static func loginListener(onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METLogInCompletionHandler {
         return DDPListeners.errorListener(named: "###",
                                           withHeader: DDPLog.kLogHeaderLogin,
                                           onSuccess: onSuccess,
@@ -47,7 +47,7 @@ open class DDPListeners {
                                           onFinish: onFinish)
     }
     
-    open static func logoutListener(onSuccess: ((Void) -> Void)?, onError: ((Error) -> Void)?, onFinish: ((Void) -> Void)?) -> METLogOutCompletionHandler {
+    open static func logoutListener(onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METLogOutCompletionHandler {
         return DDPListeners.errorListener(named: "###",
                                           withHeader: DDPLog.kLogHeaderLogout,
                                           onSuccess: onSuccess,
@@ -55,7 +55,7 @@ open class DDPListeners {
                                           onFinish: onFinish)
     }
     
-    fileprivate static func errorListener(named name: String, withHeader header: String, onSuccess: ((Void) -> Void)?, onError: ((Error) -> Void)?, onFinish: ((Void) -> Void)?) -> (Error?) -> Void {
+    fileprivate static func errorListener(named name: String, withHeader header: String, onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> (Error?) -> Void {
         DDPLog.p(DDPLog.kLogTag, header: header, params: name)
         return { (error: Error?) in
             if let error = error {
