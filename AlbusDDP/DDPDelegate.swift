@@ -12,24 +12,64 @@ import Meteor
 open class DDPDelegate {
     
     fileprivate var clientListeners: [DDPClientListener]
+    fileprivate var serverURL: URL
+    fileprivate var meteorClient: METDDPClient!
     
-    open let meteorClient: METDDPClient
     
     public init(serverURL: URL) {
         self.clientListeners = [DDPClientListener]()
-        self.meteorClient = METDDPClient(serverURL: serverURL)
+        self.serverURL = serverURL
+        self.meteorClient = self.initClient()
+    }
+    
+    fileprivate func initClient() -> METDDPClient {
+        let client = METDDPClient(serverURL: self.serverURL)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(DDPDelegate.meteorClientConnectionStatusDidChanged),
                                                name: NSNotification.Name.METDDPClientDidChangeConnectionStatus,
-                                               object: self.meteorClient)
+                                               object: client)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(DDPDelegate.meteorDatabaseDidChange(_:)),
                                                name: NSNotification.Name.METDatabaseDidChange,
-                                               object: self.meteorClient.database)
+                                               object: client.database)
+        return client
     }
     
+    fileprivate func deinitClient(onFinish: (() -> Void)?) {
+        self.meteorClient.logout(completionHandler:
+            DDPListeners.logoutListener(onSuccess: nil,
+                                        onError: nil,
+                                        onFinish: {
+                                            self.meteorClient.disconnect()
+                                            NotificationCenter.default.removeObserver(self)
+                                            if let onFinish = onFinish {
+                                                onFinish()
+                                            }
+            }))
+    }
     
-    //MARK: - SUBSCRIPTIONS HELPERS
+    open func getClient() -> METDDPClient {
+        return self.meteorClient
+    }
+    
+    open func connectClient() {
+        self.meteorClient.connect()
+    }
+    
+    open func reconnectClient() {
+        if self.meteorClient.isConnected {
+            self.deinitClient(onFinish: {
+                self.meteorClient = self.initClient()
+                self.connectClient()
+            })
+        } else {
+            self.meteorClient = self.initClient()
+            self.connectClient()
+        }
+    }
+
+    
+    //MARK: -SUBSCRIPTIONS HELPERS
     
     open func addSubscription(named subscriptionName: String, forCollections collections: DDPCollection<DDPDocument>...) {
         for collection in collections {
@@ -80,7 +120,7 @@ open class DDPDelegate {
     //MARK: - SELECTORS
     
     @objc open func meteorClientConnectionStatusDidChanged() {
-        DDPLog.p("DDP", header: "CONNECTION STATUS", params: self.meteorClient.connectionStatus.description)
+        DDPLog.p(DDPLog.kLogTag, header: DDPLog.kLogHeaderConnection, params: self.meteorClient.connectionStatus.description)
     }
     
     
@@ -92,7 +132,7 @@ open class DDPDelegate {
                 let changeTypeName: String = documentChangeDetails.changeType.description
                 let collectionName: String = documentChangeDetails.documentKey.collectionName
                 let documentId: String = documentChangeDetails.documentKey.documentID as! String
-                DDPLog.p("DDP", header: changeTypeName, params: collectionName, documentId)
+                DDPLog.p(DDPLog.kLogTag, header: changeTypeName, params: collectionName, documentId)
                 
                 for clientListener in self.clientListeners {
                     switch(documentChangeDetails.changeType) {

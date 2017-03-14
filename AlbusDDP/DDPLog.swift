@@ -11,6 +11,7 @@ import Foundation
 open class DDPLog {
     
     open static let kLogTag: String = "DDP"
+    open static let kLogHeaderConnection: String = "CONNECTION STATUS"
     open static let kLogHeaderLogin: String = "LOGIN"
     open static let kLogHeaderLogout: String = "LOGOUT"
     open static let kLogHeaderMethod: String = "METHOD"
