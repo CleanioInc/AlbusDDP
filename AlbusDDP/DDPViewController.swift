@@ -19,7 +19,11 @@ open class DDPViewController: UIViewController {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
         if let collections = self.onListenCollections() {
-            self.listenedCollections.append(contentsOf: collections)
+            for anyCollection in collections {
+                if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                    self.listenedCollections.append(ddpCollection)
+                }
+            }
         }
     }
     
@@ -36,7 +40,7 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    open func onListenCollections<T:DDPDocument>() -> [DDPCollection<T>]? {
+    open func onListenCollections() -> [Any]? {
         return nil
     }
     

@@ -71,9 +71,11 @@ open class DDPDelegate {
     
     //MARK: -SUBSCRIPTIONS HELPERS
     
-    open func addSubscription<T:DDPDocument>(named subscriptionName: String, forCollections collections: DDPCollection<T>...) {
-        for collection in collections {
-            self.addClientListener(collection)
+    open func addSubscription(named subscriptionName: String, forCollections collections: Any...) {
+        for anyCollection in collections {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                self.addClientListener(ddpCollection)
+            }
         }
         self.meteorClient.addSubscription(withName: subscriptionName, completionHandler:
             DDPListeners.subscriptionListener(named: subscriptionName,
@@ -86,9 +88,11 @@ open class DDPDelegate {
                                               onFinish: nil))
     }
     
-    fileprivate func notifySubscriptionReady<T:DDPDocument>(withError error: Error?, forCollections collections: [DDPCollection<T>]) {
-        for collection in collections {
-            collection.onSubscriptionReady(true, error: error)
+    fileprivate func notifySubscriptionReady(withError error: Error?, forCollections collections: [Any]) {
+        for anyCollection in collections {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                ddpCollection.onSubscriptionReady(true, error: error)
+            }
         }
     }
     

@@ -10,6 +10,7 @@
 		C3A101AE1E70541200485061 /* AlbusDDP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A101A41E70541200485061 /* AlbusDDP.framework */; };
 		C3A101B31E70541200485061 /* AlbusDDPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A101B21E70541200485061 /* AlbusDDPTests.swift */; };
 		C3A101B51E70541200485061 /* AlbusDDP.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A101A71E70541200485061 /* AlbusDDP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3C2383D1E79ADA400013E38 /* DDPSubCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2383C1E79ADA400013E38 /* DDPSubCollection.swift */; };
 		C3F1F7831E71BE52000B2AA7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = C3F1F7821E71BE52000B2AA7 /* Cartfile */; };
 		C3F1F7881E71BFA4000B2AA7 /* DDPDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */; };
 		C3F1F7931E72C143000B2AA7 /* DDPCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */; };
@@ -44,6 +45,7 @@
 		C3A101AD1E70541200485061 /* AlbusDDPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlbusDDPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A101B21E70541200485061 /* AlbusDDPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbusDDPTests.swift; sourceTree = "<group>"; };
 		C3A101B41E70541200485061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3C2383C1E79ADA400013E38 /* DDPSubCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPSubCollection.swift; sourceTree = "<group>"; };
 		C3F1F7821E71BE52000B2AA7 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPDocument.swift; sourceTree = "<group>"; };
 		C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPCollection.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */,
 				C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */,
+				C3C2383C1E79ADA400013E38 /* DDPSubCollection.swift */,
 				C3F1F7941E72EF51000B2AA7 /* DDPUpdateType.swift */,
 			);
 			name = Models;
@@ -304,6 +307,7 @@
 				C3F1F79B1E72FA96000B2AA7 /* DDPCollectionListener.swift in Sources */,
 				C3F1F7931E72C143000B2AA7 /* DDPCollection.swift in Sources */,
 				C3F1F7981E72F8E7000B2AA7 /* DDPDelegate.swift in Sources */,
+				C3C2383D1E79ADA400013E38 /* DDPSubCollection.swift in Sources */,
 				C3F1F7881E71BFA4000B2AA7 /* DDPDocument.swift in Sources */,
 				C3F1F7A21E730258000B2AA7 /* ExMETDDPConnectionStatus.swift in Sources */,
 				C3F1F7FA1E771588000B2AA7 /* DDPListeners.swift in Sources */,

@@ -25,12 +25,19 @@ open class DDPCollection<T:DDPDocument> {
         self.ready = false
     }
     
-    
-    open func add(withId documentId: String?, andFields fields: JSONFields) {
-        self.add(atIndex: self.documents.count, withId: documentId, andFields: fields)
+    open func add(_ document: T) {
+        self.add(document, atIndex: self.documents.count)
     }
     
-    open func add(atIndex index: Int, withId documentId: String?, andFields fields: JSONFields) {
+    open func add(_ document: T, atIndex index: Int) {
+        self.documents.insert(document, at: index)
+    }
+    
+    open func add(withId documentId: String?, andFields fields: JSONFields) {
+        self.add(withId: documentId, andFields: fields, atIndex: self.documents.count)
+    }
+    
+    open func add(withId documentId: String?, andFields fields: JSONFields, atIndex index: Int) {
         if documentId == nil || !self.update(withId: documentId!, updatedFields: fields, removedFields: nil) {
             if let document: T = T.build(documentId: documentId, documentFields: fields) {
                 self.documents.insert(document, at: index)
@@ -88,7 +95,7 @@ open class DDPCollection<T:DDPDocument> {
         return nil
     }
     
-    fileprivate func notifyCollectionListenersDocument(withId documentId: String?, updatedWithType updateType: DDPUpdateType) {
+    public func notifyCollectionListenersDocument(withId documentId: String?, updatedWithType updateType: DDPUpdateType) {
         for listener in self.collectionListeners {
             listener.onCollection(self, updatedDocument: documentId, withUpdateType: updateType)
         }
