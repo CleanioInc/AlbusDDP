@@ -36,7 +36,7 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    open func onListenCollections() -> [DDPCollection<DDPDocument>]? {
+    open func onListenCollections<T:DDPDocument>() -> [DDPCollection<T>]? {
         return nil
     }
     
