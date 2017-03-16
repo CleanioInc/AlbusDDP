@@ -9,18 +9,17 @@
 import Foundation
 
 
-public protocol SubCollectionRunnable {
-    func isDocumentFromSubCollection<T:DDPDocument>(document: T) -> Bool
-}
+public typealias DocumentFilter<T:DDPDocument> = (T) -> Bool
+
 
 open class DDPSubCollection<T:DDPDocument>: DDPCollection<T> {
     
     fileprivate var collection: DDPCollection<T>
-    fileprivate var subCollectionRunnable: SubCollectionRunnable
+    fileprivate var isDocumentFiltered: DocumentFilter<T>
     
-    public init(fromCollection collection: DDPCollection<T>, subCollectionRunnable: SubCollectionRunnable) {
+    public init(fromCollection collection: DDPCollection<T>, documentFilter: @escaping DocumentFilter<T>) {
         self.collection = collection
-        self.subCollectionRunnable = subCollectionRunnable
+        self.isDocumentFiltered = documentFilter
         super.init(named: collection.collectionName)
         
         self.collection.addCollectionListener(self)
@@ -30,7 +29,7 @@ open class DDPSubCollection<T:DDPDocument>: DDPCollection<T> {
     
     fileprivate func subCollection() {
         for document in self.collection {
-            if self.subCollectionRunnable.isDocumentFromSubCollection(document: document) {
+            if self.isDocumentFiltered(document) {
                 self.add(document)
             }
         }
@@ -40,7 +39,7 @@ open class DDPSubCollection<T:DDPDocument>: DDPCollection<T> {
         if  let documentId = documentId,
             let document = self.collection.find(withId: documentId) {
             let removed = self.remove(withId: documentId)
-            if self.subCollectionRunnable.isDocumentFromSubCollection(document: document) {
+            if self.isDocumentFiltered(document) {
                 self.add(document)
                 return removed ? .changed : .added
             }
