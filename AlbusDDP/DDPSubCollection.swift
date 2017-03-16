@@ -9,15 +9,15 @@
 import Foundation
 
 
-public typealias DocumentFilter<T:DDPDocument> = (T) -> Bool
+public typealias DDPDocumentFilter<T:DDPDocument> = (T) -> Bool
 
 
 open class DDPSubCollection<T:DDPDocument>: DDPCollection<T> {
     
     fileprivate var collection: DDPCollection<T>
-    fileprivate var isDocumentFiltered: DocumentFilter<T>
+    fileprivate var isDocumentFiltered: DDPDocumentFilter<T>
     
-    public init(fromCollection collection: DDPCollection<T>, documentFilter: @escaping DocumentFilter<T>) {
+    public init(fromCollection collection: DDPCollection<T>, documentFilter: @escaping DDPDocumentFilter<T>) {
         self.collection = collection
         self.isDocumentFiltered = documentFilter
         super.init(named: collection.collectionName)

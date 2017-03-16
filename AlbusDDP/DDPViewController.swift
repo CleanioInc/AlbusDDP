@@ -18,17 +18,16 @@ open class DDPViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
-        if let collections = self.onListenCollections() {
-            for anyCollection in collections {
-                if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
-                    self.listenedCollections.append(ddpCollection)
-                }
+        for anyCollection in self.onListenCollections() {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                self.listenedCollections.append(ddpCollection)
             }
         }
     }
     
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.onRefreshCollections()
         self.addViewControllerAsCollectionsListener()
     }
     
@@ -40,8 +39,8 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    open func onListenCollections() -> [Any]? {
-        return nil
+    open func onListenCollections() -> [Any] {
+        return []
     }
     
     open func onRefreshCollections() {
