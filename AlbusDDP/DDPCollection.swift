@@ -143,12 +143,12 @@ extension DDPCollection : DDPSubscriptionListener {
 extension DDPCollection : Sequence {
     
     public func makeIterator() -> AnyIterator<T> {
-        var nextIndex = self.documents.count - 1
+        var nextIndex = self.documents.count
         return AnyIterator {
+            nextIndex -= 1
             if (nextIndex < 0) {
                 return nil
             }
-            nextIndex -= 1
             return self.documents[nextIndex]
         }
     }

@@ -71,6 +71,31 @@ open class DDPDelegate {
     
     //MARK: -SUBSCRIPTIONS HELPERS
     
+    open func addSubscription2(named subscriptionName: String, forCollections collections: Any...) {
+        for anyCollection in collections {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                self.addClientListener(ddpCollection)
+            }
+        }
+        self.meteorClient.addSubscription(withName: subscriptionName, completionHandler:
+            DDPListeners.subscriptionListener(named: subscriptionName,
+                                              onSuccess: { (Void) in
+                                                self.notifySubscriptionReady2(withError: nil, forCollections: collections)
+            },
+                                              onError: { (error: Error) in
+                                                self.notifySubscriptionReady2(withError: nil, forCollections: collections)
+            },
+                                              onFinish: nil))
+    }
+    
+    fileprivate func notifySubscriptionReady2(withError error: Error?, forCollections collections: [Any]) {
+        for anyCollection in collections {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                ddpCollection.onSubscriptionReady(true, error: error)
+            }
+        }
+    }
+    
     open func addSubscription<T:DDPDocument>(named subscriptionName: String, forCollections collections: DDPCollection<T>...) {
         for collection in collections {
             self.addClientListener(collection)
@@ -90,11 +115,6 @@ open class DDPDelegate {
         for collection in collections {
             collection.onSubscriptionReady(true, error: error)
         }
-    }
-    
-    
-    func upcast<T, U>(bla: T) -> U? {
-        return bla as? U
     }
     
     
