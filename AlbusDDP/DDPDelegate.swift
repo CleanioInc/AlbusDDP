@@ -90,6 +90,7 @@ open class DDPDelegate {
     
     fileprivate func notifySubscriptionReady(withError error: Error?, forCollections collections: [Any]) {
         for anyCollection in collections {
+            DDPLog.p("DDP", header: "### TEST ###", params: "\(type(of:anyCollection))")
             if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
                 ddpCollection.onSubscriptionReady(true, error: error)
             }
