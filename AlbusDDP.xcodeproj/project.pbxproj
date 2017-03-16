@@ -11,6 +11,7 @@
 		C3A101B31E70541200485061 /* AlbusDDPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A101B21E70541200485061 /* AlbusDDPTests.swift */; };
 		C3A101B51E70541200485061 /* AlbusDDP.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A101A71E70541200485061 /* AlbusDDP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C2383D1E79ADA400013E38 /* DDPSubCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2383C1E79ADA400013E38 /* DDPSubCollection.swift */; };
+		C3C2383F1E7A8AA400013E38 /* AlbusDDP.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C3C2383E1E7A8AA400013E38 /* AlbusDDP.podspec */; };
 		C3F1F7831E71BE52000B2AA7 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = C3F1F7821E71BE52000B2AA7 /* Cartfile */; };
 		C3F1F7881E71BFA4000B2AA7 /* DDPDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */; };
 		C3F1F7931E72C143000B2AA7 /* DDPCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */; };
@@ -46,6 +47,7 @@
 		C3A101B21E70541200485061 /* AlbusDDPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbusDDPTests.swift; sourceTree = "<group>"; };
 		C3A101B41E70541200485061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3C2383C1E79ADA400013E38 /* DDPSubCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPSubCollection.swift; sourceTree = "<group>"; };
+		C3C2383E1E7A8AA400013E38 /* AlbusDDP.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AlbusDDP.podspec; sourceTree = "<group>"; };
 		C3F1F7821E71BE52000B2AA7 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		C3F1F7871E71BFA4000B2AA7 /* DDPDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPDocument.swift; sourceTree = "<group>"; };
 		C3F1F7921E72C143000B2AA7 /* DDPCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDPCollection.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				C3A101B11E70541200485061 /* AlbusDDPTests */,
 				C3A101A51E70541200485061 /* Products */,
 				C3F1F7821E71BE52000B2AA7 /* Cartfile */,
+				C3C2383E1E7A8AA400013E38 /* AlbusDDP.podspec */,
 				C3F1F7CE1E76B66D000B2AA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F1F7831E71BE52000B2AA7 /* Cartfile in Resources */,
+				C3C2383F1E7A8AA400013E38 /* AlbusDDP.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
