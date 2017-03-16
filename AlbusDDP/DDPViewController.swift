@@ -18,8 +18,10 @@ open class DDPViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         self.listenedCollections = [DDPCollection<DDPDocument>]()
+        DDPLog.p("DDP", header: "TEST", params: "ON LISTEN COLLECTION")
         for anyCollection in self.onListenCollections() {
             if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                DDPLog.p("DDP", header: "TEST", params: "COLLECTION AS DDPDOCUMENT")
                 self.listenedCollections.append(ddpCollection)
             }
         }
@@ -56,6 +58,7 @@ open class DDPViewController: UIViewController {
     
     private func addViewControllerAsCollectionsListener() {
         for collection in self.listenedCollections {
+            DDPLog.p("DDP", header: "TEST", params: "VC AS COLLECTION LISTENER")
             collection.addCollectionListener(self)
         }
     }

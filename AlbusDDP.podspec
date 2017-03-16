@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "AlbusDDP"
-  spec.version = "1.0.3"
+  spec.version = "1.0.4"
   spec.summary = "DDP Collection/Document"
   spec.homepage = "https://github.com/CleanioInc/AlbusDDP"
   spec.license = { type: 'MIT', file: 'LICENSE' }
