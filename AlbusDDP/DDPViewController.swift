@@ -34,6 +34,10 @@ open class DDPViewController: UIViewController {
                                                object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.onRefreshCollections()

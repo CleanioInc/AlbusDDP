@@ -148,6 +148,7 @@ open class DDPDelegate {
                         break
                     case .update:
                         if let updatedFields = documentChangeDetails.changedFields as? JSONFields {
+                            DDPLog.p(DDPLog.kLogTag, header: changeTypeName, params: "\(updatedFields)")
                             clientListener.onCollection(named: collectionName, changedDocument: documentId, withUpdatedFields: updatedFields)
                         }
                         break

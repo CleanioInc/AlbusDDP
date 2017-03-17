@@ -49,7 +49,8 @@ open class DDPDocument: NSObject, Mappable {
                 let value = field.value
                 let mirroredValue = Mirror(reflecting: value)
                 if mirroredValue.children.count > 0 && label != nil {
-                    self.setValue(value, forKey: field.label!)
+                    DDPLog.p("DDP", header: "### TEST ###", params: "label: \(label)", "value: \(value)", "get value: \(self.value(forKey: label!))")
+                    self.setValue(value, forKey: label!)
                 }
             }
         }
