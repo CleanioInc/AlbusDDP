@@ -12,17 +12,14 @@ import Foundation
 open class DDPViewController: UIViewController {
     
     
-    fileprivate var listenedCollections: [DDPCollection<DDPDocument>]!
+    fileprivate var listenedCollections: [DDPCollectionProtocol]!
     
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        self.listenedCollections = [DDPCollection<DDPDocument>]()
-        for anyCollection in self.onListenCollections() {
-            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
-                self.listenedCollections.append(ddpCollection)
-            }
-        }
+        
+        self.listenedCollections = [DDPCollectionProtocol]()
+        self.listenedCollections.append(contentsOf: self.onListenCollections())
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(DDPViewController.applicationWillEnterForeground),
@@ -61,7 +58,7 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController INHERITANCE
     
-    open func onListenCollections() -> [Any] {
+    open func onListenCollections() -> [DDPCollectionProtocol] {
         return []
     }
     

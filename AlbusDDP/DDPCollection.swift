@@ -9,7 +9,13 @@
 import Foundation
 
 
-open class DDPCollection<T:DDPDocument> {
+public protocol DDPCollectionProtocol: class {
+    func addCollectionListener(_ newListener: DDPCollectionListener)
+    func removeCollectionListener(_ oldListener: DDPCollectionListener)
+    func notifyCollectionListenersDocument(withId documentId: String?, updatedWithType updateType: DDPUpdateType)
+}
+
+open class DDPCollection<T:DDPDocument>: DDPCollectionProtocol {
 
     
     fileprivate var documents: [T]
