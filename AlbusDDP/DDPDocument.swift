@@ -31,46 +31,14 @@ open class DDPDocument: NSObject, Mappable {
         return nil
     }
     
-    open func update<T:DDPDocument>(updatedFields: JSONFields?, removedFields: String?, type: T.Type) {
+    open func update(updatedFields: JSONFields?) {
         if let updatedFields = updatedFields {
-            self.updateFields(updatedFields: updatedFields, type: type)
-        }
-        if let removedFields = removedFields {
-            self.removeFields(removedFields: removedFields)
+            let map = Map(mappingType: MappingType.fromJSON, JSON: updatedFields, toObject: true)
+            self.mapping(map: map)
         }
     }
     
     
-    fileprivate func updateFields<T:DDPDocument>(updatedFields: JSONFields, type: T.Type) {
-        if let updatedDocument = Mapper<T>().map(JSON: updatedFields) {
-            let mirroredUpdatedDocument = Mirror(reflecting: updatedDocument)
-            for field in mirroredUpdatedDocument.children {
-                let label = field.label
-                let value = field.value
-                let mirroredValue = Mirror(reflecting: value)
-                if mirroredValue.children.count > 0 && label != nil {
-//                    if value is Int? {
-//                        self.setValue(value, forKey: label!)
-//                    }
-                    self.setValue(value, forKey: label!)
-                }
-            }
-        }
-    }
-    
-    fileprivate func removeFields(removedFields: String) {
-        if let removedFieldsData = removedFields.data(using: String.Encoding.utf8, allowLossyConversion: true) {
-            do {
-                if let removedFieldsNames = try JSONSerialization.jsonObject(with: removedFieldsData, options: .allowFragments) as? [String] {
-                    for fieldName in removedFieldsNames {
-                        self.setNilValueForKey(fieldName)
-                    }
-                }
-            } catch let error {
-                print("DDP ### PARSING ERROR : \(error)")
-            }
-        }
-    }
     
 }
 

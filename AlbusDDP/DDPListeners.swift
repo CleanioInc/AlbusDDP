@@ -11,35 +11,11 @@ import Meteor
 
 open class DDPListeners {
     
-    open static func methodListener(named methodName: String) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: true, onSuccess: nil, onError: nil, onFinish: nil)
-    }
-    
-    open static func methodListener(named methodName: String, onFinish: (() -> Void)?) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: true, onSuccess: nil, onError: nil, onFinish: onFinish)
-    }
-    
-    open static func methodListener(named methodName: String, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: true, onSuccess: onSuccess, onError: onError, onFinish: nil)
-    }
-    
-    open static func methodListener(named methodName: String, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METMethodCompletionHandler {
+    open static func methodListener(named methodName: String, onSuccess: ((Any?) -> Void)? = nil, onError: ((Error) -> Void)? = nil, onFinish: (() -> Void)? = nil) -> METMethodCompletionHandler {
         return DDPListeners.resultListener(named: methodName, onMainThread: true, onSuccess: onSuccess, onError: onError, onFinish: onFinish)
     }
     
-    open static func methodListener(named methodName: String, onMainThread: Bool) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: onMainThread, onSuccess: nil, onError: nil, onFinish: nil)
-    }
-    
-    open static func methodListener(named methodName: String, onMainThread: Bool, onFinish: (() -> Void)?) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: onMainThread, onSuccess: nil, onError: nil, onFinish: onFinish)
-    }
-    
-    open static func methodListener(named methodName: String, onMainThread: Bool, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?) -> METMethodCompletionHandler {
-        return DDPListeners.resultListener(named: methodName, onMainThread: onMainThread, onSuccess: onSuccess, onError: onError, onFinish: nil)
-    }
-    
-    open static func methodListener(named methodName: String, onMainThread: Bool, onSuccess: ((Any?) -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METMethodCompletionHandler {
+    open static func methodListener(named methodName: String, onMainThread: Bool, onSuccess: ((Any?) -> Void)? = nil, onError: ((Error) -> Void)? = nil, onFinish: (() -> Void)? = nil) -> METMethodCompletionHandler {
         return DDPListeners.resultListener(named: methodName, onMainThread: onMainThread, onSuccess: onSuccess, onError: onError, onFinish: onFinish)
     }
     
@@ -49,79 +25,96 @@ open class DDPListeners {
             if let error = error {
                 DDPLog.p(DDPLog.kLogTag, header: DDPLog.kLogHeaderMethod, params: methodName, DDPLog.kLogResultError, error.localizedDescription)
                 if let onError = onError {
-                    if onMainThread {
-                        DispatchQueue.main.async(execute: {
-                            onError(error)
-                        })
-                    } else {
-                        onError(error)
-                    }
+                    DDPListeners.execute(onError, withError: error, onMainThread: onMainThread)
                 }
             } else {
                 DDPLog.p(DDPLog.kLogTag, header: DDPLog.kLogHeaderMethod, params: methodName, DDPLog.kLogResultSuccess, "\(result)")
                 if let onSuccess = onSuccess {
-                    if onMainThread {
-                        DispatchQueue.main.async(execute: {
-                            onSuccess(result)
-                        })
-                    } else {
-                        onSuccess(result)
-                    }
+                    DDPListeners.execute(onSuccess, withResult: result, onMainThread: onMainThread)
                 }
             }
-            if  let onFinish = onFinish {
-                if onMainThread {
-                    DispatchQueue.main.async(execute: {
-                        onFinish()
-                    })
-                } else {
-                    onFinish()
-                }
+            if let onFinish = onFinish {
+                DDPListeners.execute(onFinish, onMainThread: onMainThread)
             }
         }
     }
     
-    open static func subscriptionListener(named subscriptionName: String, onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METSubscriptionCompletionHandler {
+    open static func subscriptionListener(named subscriptionName: String, onMainThread: Bool = false, onSuccess: (() -> Void)? = nil, onError: ((Error) -> Void)? = nil, onFinish: (() -> Void)? = nil) -> METSubscriptionCompletionHandler {
         return DDPListeners.errorListener(named: subscriptionName,
                                           withHeader: DDPLog.kLogHeaderSubscription,
+                                          onMainThread: onMainThread,
                                           onSuccess: onSuccess,
                                           onError: onError,
                                           onFinish: onFinish)
     }
     
-    open static func loginListener(onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METLogInCompletionHandler {
+    open static func loginListener(onMainThread: Bool = false, onSuccess: (() -> Void)? = nil, onError: ((Error) -> Void)? = nil, onFinish: (() -> Void)? = nil) -> METLogInCompletionHandler {
         return DDPListeners.errorListener(named: "###",
                                           withHeader: DDPLog.kLogHeaderLogin,
+                                          onMainThread: onMainThread,
                                           onSuccess: onSuccess,
                                           onError: onError,
                                           onFinish: onFinish)
     }
     
-    open static func logoutListener(onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> METLogOutCompletionHandler {
+    open static func logoutListener(onMainThread: Bool = false, onSuccess: (() -> Void)? = nil, onError: ((Error) -> Void)? = nil, onFinish: (() -> Void)? = nil) -> METLogOutCompletionHandler {
         return DDPListeners.errorListener(named: "###",
                                           withHeader: DDPLog.kLogHeaderLogout,
+                                          onMainThread: onMainThread,
                                           onSuccess: onSuccess,
                                           onError: onError,
                                           onFinish: onFinish)
     }
     
-    fileprivate static func errorListener(named name: String, withHeader header: String, onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> (Error?) -> Void {
+    fileprivate static func errorListener(named name: String, withHeader header: String, onMainThread: Bool, onSuccess: (() -> Void)?, onError: ((Error) -> Void)?, onFinish: (() -> Void)?) -> (Error?) -> Void {
         DDPLog.p(DDPLog.kLogTag, header: header, params: name)
         return { (error: Error?) in
             if let error = error {
                 DDPLog.p(DDPLog.kLogTag, header: header, params: name, DDPLog.kLogResultError, error.localizedDescription)
                 if let onError = onError {
-                    onError(error)
+                    DDPListeners.execute(onError, withError: error, onMainThread: onMainThread)
                 }
             } else {
                 DDPLog.p(DDPLog.kLogTag, header: header, params: name, DDPLog.kLogResultSuccess)
                 if let onSuccess = onSuccess {
-                    onSuccess()
+                    DDPListeners.execute(onSuccess, onMainThread: onMainThread)
                 }
             }
             if  let onFinish = onFinish {
-                onFinish()
+                DDPListeners.execute(onFinish, onMainThread: onMainThread)
             }
+        }
+    }
+    
+    
+    
+    fileprivate static func execute(_ closure: @escaping (()->Void), onMainThread: Bool) {
+        if onMainThread {
+            DispatchQueue.main.async(execute: {
+                closure()
+            })
+        } else {
+            closure()
+        }
+    }
+    
+    fileprivate static func execute(_ closure: @escaping ((Any?)->Void), withResult result: Any?, onMainThread: Bool) {
+        if onMainThread {
+            DispatchQueue.main.async(execute: {
+                closure(result)
+            })
+        } else {
+            closure(result)
+        }
+    }
+    
+    fileprivate static func execute(_ closure: @escaping ((Error)->Void), withError error: Error, onMainThread: Bool) {
+        if onMainThread {
+            DispatchQueue.main.async(execute: {
+                closure(error)
+            })
+        } else {
+            closure(error)
         }
     }
     

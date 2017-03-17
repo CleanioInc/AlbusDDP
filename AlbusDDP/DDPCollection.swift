@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 
 
 open class DDPCollection<T:DDPDocument> {
@@ -39,18 +38,16 @@ open class DDPCollection<T:DDPDocument> {
     }
     
     open func add(withId documentId: String?, andFields fields: JSONFields, atIndex index: Int) {
-        if documentId == nil || !self.update(withId: documentId!, updatedFields: fields, removedFields: nil) {
+        if documentId == nil || !self.update(withId: documentId!, updatedFields: fields) {
             if let document: T = T.build(documentId: documentId, documentFields: fields) {
                 self.documents.insert(document, at: index)
             }
         }
     }
     
-    open func update(withId documentId: String, updatedFields: JSONFields?, removedFields: String?) -> Bool {
+    open func update(withId documentId: String, updatedFields: JSONFields?) -> Bool {
         if let document = self.find(withId: documentId) {
-            let map = Map(mappingType: MappingType.fromJSON, JSON: updatedFields!, toObject: true)
-            document.mapping(map: map)
-//            document.update(updatedFields: updatedFields, removedFields: removedFields, type: T.self)
+            document.update(updatedFields: updatedFields)
             return true
         }
         return false
@@ -118,7 +115,7 @@ extension DDPCollection : DDPClientListener {
     
     open func onCollection(named collectionName: String, changedDocument documentId: String, withUpdatedFields updatedFields: JSONFields) {
         if self.collectionName == collectionName {
-            if self.update(withId: documentId, updatedFields: updatedFields, removedFields: nil) {
+            if self.update(withId: documentId, updatedFields: updatedFields) {
                 self.notifyCollectionListenersDocument(withId: documentId, updatedWithType: .changed)
             }
         }
