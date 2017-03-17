@@ -75,7 +75,9 @@ open class DDPCollection<T:DDPDocument> {
     //MARK: - DDPCollectionListener
     
     open func addCollectionListener(_ newListener: DDPCollectionListener) {
+        DDPLog.p("DDP", header: "### TEST ###", params: "ADD COLLECTION LISTENER")
         if self.indexForCollectionListener(listener: newListener) == nil {
+            DDPLog.p("DDP", header: "### TEST ###", params: "ADDED COLLECTION LISTENER")
             self.collectionListeners.append(newListener)
         }
     }
@@ -96,7 +98,9 @@ open class DDPCollection<T:DDPDocument> {
     }
     
     public func notifyCollectionListenersDocument(withId documentId: String?, updatedWithType updateType: DDPUpdateType) {
+        DDPLog.p("DDP", header: "### TEST ###", params: "NOTIFY COLLECTION LISTENER -------")
         for listener in self.collectionListeners {
+            DDPLog.p("DDP", header: "### TEST ###", params: "NOTIFY COLLECTION LISTENER")
             listener.onCollection(self, updatedDocument: documentId, withUpdateType: updateType)
         }
     }
@@ -135,6 +139,7 @@ extension DDPCollection : DDPSubscriptionListener {
     
     open func onSubscriptionReady(_ ready: Bool, error: Error?) {
         self.ready = ready
+        DDPLog.p("DDP", header: "### TEST ###", params: "NOTIFY COLLECTION READY")
         self.notifyCollectionListenersDocument(withId: nil, updatedWithType: .ready)
     }
     
