@@ -25,15 +25,15 @@ open class DDPViewController: UIViewController {
         }
     }
     
-    override open func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.onRefreshCollections()
         self.addViewControllerAsCollectionsListener()
     }
     
-    override open func viewWillDisappear(_ animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         self.removeViewControllerAsCollectionsListener()
-        super.viewWillDisappear(animated)
+        super.viewDidDisappear(animated)
     }
     
     
