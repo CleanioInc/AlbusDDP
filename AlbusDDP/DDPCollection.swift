@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 
 open class DDPCollection<T:DDPDocument> {
@@ -47,7 +48,9 @@ open class DDPCollection<T:DDPDocument> {
     
     open func update(withId documentId: String, updatedFields: JSONFields?, removedFields: String?) -> Bool {
         if let document = self.find(withId: documentId) {
-            document.update(updatedFields: updatedFields, removedFields: removedFields, type: T.self)
+            let map = Map(mappingType: MappingType.fromJSON, JSON: updatedFields!, toObject: true)
+            document.mapping(map: map)
+//            document.update(updatedFields: updatedFields, removedFields: removedFields, type: T.self)
             return true
         }
         return false
