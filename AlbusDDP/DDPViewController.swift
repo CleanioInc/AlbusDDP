@@ -23,6 +23,15 @@ open class DDPViewController: UIViewController {
                 self.listenedCollections.append(ddpCollection)
             }
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(DDPViewController.applicationWillEnterForeground),
+                                               name: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(DDPViewController.applicationDidEnterBackground),
+                                               name: NSNotification.Name.UIApplicationDidEnterBackground,
+                                               object: nil)
     }
     
     override open func viewWillAppear(_ animated: Bool) {
@@ -34,6 +43,15 @@ open class DDPViewController: UIViewController {
     override open func viewDidDisappear(_ animated: Bool) {
         self.removeViewControllerAsCollectionsListener()
         super.viewDidDisappear(animated)
+    }
+    
+    // MARK: Actions/Targets
+    
+    open func applicationWillEnterForeground() {
+        self.onRefreshCollections()
+    }
+    
+    open func applicationDidEnterBackground() {
     }
     
     
