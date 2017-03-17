@@ -71,6 +71,29 @@ open class DDPDelegate {
     
     //MARK: -SUBSCRIPTIONS HELPERS
     
+    open func addSubscription3(named subscriptionName: String, forCollections collections: DDPClientListener...) {
+        for collection in collections {
+            self.addClientListener(collection)
+        }
+        self.meteorClient.addSubscription(withName: subscriptionName, completionHandler:
+            DDPListeners.subscriptionListener(named: subscriptionName,
+                                              onSuccess: { (Void) in
+                                                self.notifySubscriptionReady3(withError: nil, forCollections: collections)
+            },
+                                              onError: { (error: Error) in
+                                                self.notifySubscriptionReady3(withError: nil, forCollections: collections)
+            },
+                                              onFinish: nil))
+    }
+    
+    fileprivate func notifySubscriptionReady3(withError error: Error?, forCollections collections: [Any]) {
+        for anyCollection in collections {
+            if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
+                ddpCollection.onSubscriptionReady(true, error: error)
+            }
+        }
+    }
+    
     open func addSubscription2(named subscriptionName: String, forCollections collections: Any...) {
         for anyCollection in collections {
             if let ddpCollection = anyCollection as? DDPCollection<DDPDocument> {
@@ -122,6 +145,7 @@ open class DDPDelegate {
     
     open func addClientListener(_ newListener: DDPClientListener) {
         if self.indexForClientListener(listener: newListener) == nil {
+            DDPLog.p("DDP", header: "### TEST ###", params: "ADDED LISTENER")
             self.clientListeners.append(newListener)
         }
     }
@@ -135,6 +159,7 @@ open class DDPDelegate {
     fileprivate func indexForClientListener(listener: DDPClientListener) -> Int? {
         for i in 0..<self.clientListeners.count {
             if self.clientListeners[i] === listener {
+                DDPLog.p("DDP", header: "### TEST ###", params: "FOUND LISTENER")
                 return i
             }
         }
