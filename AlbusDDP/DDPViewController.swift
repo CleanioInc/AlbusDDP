@@ -95,7 +95,9 @@ open class DDPViewController: UIViewController {
 extension DDPViewController: DDPCollectionListener {
     
     open func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
+        DDPLog.p("DDP", header: "### TEST ###", params: "VC ON COLLECTION")
         DispatchQueue.main.async(execute: {
+            DDPLog.p("DDP", header: "### TEST ###", params: "VC ON COLLECTION MAIN")
             self.onCollectionUpdatedOnMainQueue(collection, documentId: documentId, updateType: updateType)
         })
     }
