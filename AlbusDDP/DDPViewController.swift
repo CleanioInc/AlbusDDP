@@ -93,7 +93,7 @@ extension DDPViewController: DDPCollectionListener {
     open func onCollection<T:DDPDocument>(_ collection: DDPCollection<T>, updatedDocument documentId: String?, withUpdateType updateType: DDPUpdateType) {
         DispatchQueue.main.async(execute: {
             self.onCollectionUpdatedOnMainQueue(collection, documentId: documentId, updateType: updateType)
-        });
+        })
     }
     
 }
