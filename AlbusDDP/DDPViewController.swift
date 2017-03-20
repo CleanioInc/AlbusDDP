@@ -73,13 +73,13 @@ open class DDPViewController: UIViewController {
     
     //MARK: - DDPViewController HELPERS
     
-    private func addViewControllerAsCollectionsListener() {
+    open func addViewControllerAsCollectionsListener() {
         for collection in self.listenedCollections {
             collection.addCollectionListener(self)
         }
     }
     
-    private func removeViewControllerAsCollectionsListener() {
+    open func removeViewControllerAsCollectionsListener() {
         for collection in self.listenedCollections {
             collection.removeCollectionListener(self)
         }

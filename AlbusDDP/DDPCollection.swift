@@ -17,10 +17,9 @@ public protocol DDPCollectionProtocol: class {
 
 open class DDPCollection<T:DDPDocument>: DDPCollectionProtocol {
 
-    
-    fileprivate var documents: [T]
     fileprivate var collectionListeners: [DDPCollectionListener]
     
+    open var documents: [T]
     open var collectionName: String
     open var ready: Bool
     
