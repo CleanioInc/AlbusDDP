@@ -19,6 +19,9 @@ open class DDPLog {
     open static let kLogResultSuccess: String = "SUCCESS"
     open static let kLogResultError: String = "ERROR"
     
+    open static var logListener: ((String) -> Void)?
+    
+    
     open class func p(_ tag: String, header: String, params: String...) {
         var message: String = header
         for param: String in params {
@@ -30,6 +33,9 @@ open class DDPLog {
     open class func p(_ tag: String, message: String) {
         let formattedMessage = tag + " ### " + message
         print(formattedMessage)
+        if let logListener = DDPLog.logListener {
+            logListener(formattedMessage)
+        }
     }
     
 }
